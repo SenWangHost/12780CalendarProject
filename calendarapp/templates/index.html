@@ -3,8 +3,9 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>This is the login page</title>
-    <link rel="stylesheet" href="css/index.css">
+    <title>Home Page</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
     <!--Import Google Icon Font-->
@@ -33,7 +34,7 @@
                     <button class="btn waves-effect indigo waves-light col m2 offset-m3" type="submit" name="action">LogIn
     			<i class="material-icons right">send</i>
   	     </button>
-                    <a class="btn waves-effect indigo waves-light col m2 offset-m2" href="register.jsp">Register
+                    <a class="btn waves-effect indigo waves-light col m2 offset-m2" href="register">Register
     			<i class="material-icons right">send</i>
   		 </a>
                 </div>

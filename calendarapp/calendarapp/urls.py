@@ -16,6 +16,11 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 
+from calendarapp.views import homepage
+from calendarapp.views import register
+
 urlpatterns = [
+    url(r'^$', homepage),
+    url(r'^register/$', register),
     url(r'^admin/', admin.site.urls),
 ]
