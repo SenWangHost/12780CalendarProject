@@ -16,13 +16,15 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 
-from calendarapp.views import homepage
+from calendarapp.views import login
 from calendarapp.views import register
 admin.autodiscover()
 
 urlpatterns = [
-    url(r'^$', homepage),
-    url(r'^register/$', register),
+    #  the admin page for this project
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^login/', include('login.urls')),
+    #  the login page
+    url(r'^$', login),
+    # the register page
+    url(r'^register/$', register),
 ]

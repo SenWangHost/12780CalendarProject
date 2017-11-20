@@ -4,7 +4,7 @@ from django.template.loader import get_template
 from django.template import Context
 
 #  the view for homepage
-def homepage(request):
+def login(request):
     t = get_template('index.html')
     html = t.render()
     return HttpResponse(html)
