@@ -1,50 +1,10 @@
 @charset "UTF-8";
 #title {
     text-align: center;
-    margin-top: 200px;
+    margin-top: 100px;
+    margin-bottom: 50px;
 }
 
-
-/* label color */
-
-.input-field label {
-    color: indigo !important;
-}
-
-
-/* label focus color */
-
-.input-field input[type=text]:focus+label {
-    color: indigo !important;
-}
-
-
-/* label underline focus color */
-
-.input-field input[type=text]:focus {
-    border-bottom: 1px solid #3f51b5 !important;
-    box-shadow: 0 1px 0 0 #3f51b5 !important;
-}
-
-
-/* valid color */
-
-.input-field input[type=text].valid {
-    border-bottom: 1px solid #3f51b5 !important;
-    box-shadow: 0 1px 0 0 #3f51b5 !important;
-}
-
-
-/* invalid color */
-
-.input-field input[type=text].invalid {
-    border-bottom: 1px solid #3f51b5 !important;
-    box-shadow: 0 1px 0 0 #3f51b5 !important;
-}
-
-
-/* icon prefix focus color */
-
-.input-field .prefix.active {
-    color: #3f51b5 !important;
+#register {
+    margin: 0 auto;
 }

@@ -4,50 +4,39 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>LogIn Page</title>
-    {% load static %}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous"> {% load static %}
     <link rel="stylesheet" href="{% static 'css/index.css' %}">
-    <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
-    <!--Import Google Icon Font-->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <!-- include angular js in the web page -->
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script src="{% static 'js/index.js' %}"></script>
 </head>
 
-<body ng-app="">
+<body ng-app="" ng-controller="">
     <h3 id="title">Your Calendar! Your life!</h3>
-    <div class="col">
-        <form class="col s12">
-            <div class="row">
-                <div class="input-field col s6 m6 offset-m3">
-                    <i class="material-icons prefix">account_circle</i>
-                    <input id="icon_prefix" ng-model="email" type="text" class="validate">
-                    <label for="icon_prefix">Email Address</label>
-                    <p ng-bind="email"></p>
-                </div>
+    <form class="col-3" id="login">
+        <div class="form-group">
+            <label for="exampleInputEmail1">Email address</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" ng-model="email" aria-describedby="emailHelp" placeholder="Enter email">
+            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            <div ng-bind="email"></div>
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="checkbox" class="form-check-input">
+                Remember Me
+              </label>
+        </div>
+        <div class="form-group">
+            <input type="submit" class="btn btn-primary" value="Login"><br>
+            <a href="register">Don't have an account, register here >></a>
+        </div>
 
-                <div class="row">
-                    <div class="input-field col s6 m6 offset-m3">
-                        <i class="material-icons prefix">vpn_key</i>
-                        <input id="icon_telephone" type="text" class="validate">
-                        <label for="icon_telephone">Password</label>
-                    </div>
-                </div>
-                <div class="row">
-                    <button class="btn waves-effect indigo waves-light col m2 offset-m3" type="submit" name="action">LogIn
-    			        <i class="material-icons right">send</i>
-  	                </button>
-                    <a class="btn waves-effect indigo waves-light col m2 offset-m2" href="register">Register
-    			        <i class="material-icons right">send</i>
-  		            </a>
-                </div>
-            </div>
-        </form>
-    </div>
-    <!--Import jQuery before materialize.js-->
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <!-- Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+    </form>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
 </body>
 
 </html>
