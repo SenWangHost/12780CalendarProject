@@ -14,3 +14,9 @@ def register(request):
     t = get_template('register.html')
     html = t.render()
     return HttpResponse(html)
+
+# the view for home page
+def homepage(request):
+    t = get_template('homepage.html')
+    html = t.render()
+    return HttpResponse(html)

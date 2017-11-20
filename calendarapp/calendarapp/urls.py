@@ -18,6 +18,7 @@ from django.contrib import admin
 
 from calendarapp.views import login
 from calendarapp.views import register
+from calendarapp.views import homepage
 admin.autodiscover()
 
 urlpatterns = [
@@ -27,4 +28,6 @@ urlpatterns = [
     url(r'^$', login),
     # the register page
     url(r'^register/$', register),
+    # the home page
+    url(r'^homepage/$', homepage)
 ]
