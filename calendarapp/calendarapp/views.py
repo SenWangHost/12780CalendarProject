@@ -4,6 +4,7 @@ from django.template.loader import get_template
 from django.views.decorators.csrf import csrf_exempt
 from django.template import Context
 from django.shortcuts import render
+from login.models import User
 
 #  the view for homepage
 def login(request):
@@ -17,9 +18,21 @@ def checkUser(request):
     print("This is checkUser function")
     params = request.POST
     print(params)
-    t = get_template('homepage.html')
-    html = t.render()
-    return HttpResponse(html)
+    email = params.get("email")
+    password = params.get("password")
+    print(email)
+    print(password)
+    # t = get_template('homepage.html')
+    # html = t.render()
+    # check whether the user exists in the databases
+    try:
+        user = User.objects.get(email = email)
+    except:
+        return HttpResponse("Email not exist")
+    # check whethr the password is correct
+    if (password != user.password):
+        return HttpResponse("Incorrect Password")
+    return HttpResponse("true")
 
 # the view for register page
 def register(request):

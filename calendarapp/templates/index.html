@@ -11,7 +11,7 @@
 
 <body>
     <h3 id="title">Your Calendar! Your life!</h3>
-    <div id="errorField">
+    <div id="errorField" class="col-4">
         <!-- <div class="alert alert-danger alert-dismissible fade show" role="alert">
             <strong>Holy guacamole!</strong> You should check in on some of those fields below.
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -19,7 +19,7 @@
         </button>
         </div> -->
     </div>
-    <form class="col-3" id="login">
+    <form class="col-4" id="login">
         <div class="form-group" method="POST" action="checkUser/">
             <label for="InputEmail">Email address</label>
             <input type="email" class="form-control" id="InputEmail" aria-describedby="emailHelp" placeholder="Enter email">
@@ -40,7 +40,7 @@
             <a href="register">Don't have an account, register here >></a>
         </div> -->
     </form>
-    <div class="col-3 buttons">
+    <div class="col-4 buttons">
         <button class="btn btn-primary" onclick="login();">Login</button><br>
         <a href="register">Don't have an account, register here >></a>
     </div>
