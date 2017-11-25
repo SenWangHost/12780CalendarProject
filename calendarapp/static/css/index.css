@@ -8,3 +8,14 @@
 #login {
     margin: 0 auto;
 }
+
+#errorField {
+    width: 500px;
+    /* background-color: black; */
+    margin: 0 auto;
+}
+
+.buttons {
+    width: 400px;
+    margin: 0 auto;
+}
