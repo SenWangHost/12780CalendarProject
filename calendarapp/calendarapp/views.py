@@ -40,6 +40,27 @@ def register(request):
     html = t.render()
     return HttpResponse(html)
 
+# the function for registering user check
+@csrf_exempt
+def registerCheck(request):
+    params = request.POST
+    email = params.get("email")
+    password = params.get("password")
+    firstname = params.get("firstname")
+    lastname = params.get("lastname")
+    print(email)
+    print(password)
+    print(firstname)
+    print(lastname)
+    # check whether the email exist in the database;
+    try:
+        user = User.objects.get(email = email)
+        return HttpResponse("exists")
+    except:
+        newUser = User(email = email, password = password, firstname = firstname, lastname = lastname)
+        newUser.save()
+    return HttpResponse("true")
+
 # the view for home page
 def homepage(request):
     t = get_template('homepage.html')

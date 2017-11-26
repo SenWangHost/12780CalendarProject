@@ -20,6 +20,7 @@ from calendarapp.views import login
 from calendarapp.views import register
 from calendarapp.views import homepage
 from calendarapp.views import checkUser
+from calendarapp.views import registerCheck
 admin.autodiscover()
 
 urlpatterns = [
@@ -30,6 +31,7 @@ urlpatterns = [
     url(r'^checkUser/$', checkUser),
     # the register page
     url(r'^register/$', register),
+    url(r'^registerCheck/$', registerCheck),
     # the home page
     url(r'^homepage/$', homepage)
 ]

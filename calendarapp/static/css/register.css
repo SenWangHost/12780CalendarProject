@@ -1,4 +1,9 @@
 @charset "UTF-8";
+body {
+    background-image: url("../images/background.gif");
+    background-size: cover;
+}
+
 #title {
     text-align: center;
     margin-top: 100px;
@@ -6,5 +11,20 @@
 }
 
 #register {
+    margin: 0 auto;
+}
+
+.red {
+    color: red;
+}
+
+.buttons {
+    /* width: 500px; */
+    margin: 0 auto;
+}
+
+#errorField {
+    width: 500px;
+    /* background-color: black; */
     margin: 0 auto;
 }
