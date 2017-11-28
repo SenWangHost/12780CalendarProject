@@ -1,0 +1,84 @@
+.side-bar {
+    height: 120vh;
+    padding-top: 3vh;
+}
+
+.profile-image {
+    width: 16vw;
+    height: 16vw;
+    background-color: white;
+    margin-left: 3vw;
+    border-radius: 50%;
+    padding: 20px 32px 30px 28px;
+}
+
+.profile-image img {
+    width: 12vw;
+    height: 12vw;
+}
+
+.name {
+    font-size: 5vh;
+    text-align: center;
+    margin-top: 3vh;
+}
+
+.motto {
+    font-size: 3vh;
+    font-family: 'Indie Flower', cursive;
+    text-align: center;
+}
+
+.icon {
+    width: 30px;
+    height: 30px;
+}
+
+.buttons {
+    margin-top: 10vh;
+    margin-left: 2vw;
+    /* border: solid 3px white; */
+    text-align: left;
+}
+
+.buttons td {
+    /* border: solid 1px white; */
+    height: 8vh;
+    width: 10vw;
+    font-size: 2vh;
+}
+
+.buttons td a {
+    color: white;
+    font-weight: bold;
+}
+
+.buttons td a:hover {
+    color: green;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.medias {
+    margin-top: 20vh;
+    margin-left: 5px;
+}
+
+.medias .media {
+    width: 7vw;
+    height: 6vh;
+    display: inline-block;
+    border: 2px solid gray;
+    padding: 1vh 5px 1vh 30px;
+}
+
+.medias .media:hover {
+    border: 2px solid green;
+    transform: translate(-3px, -3px);
+    background-color: green;
+}
+
+.medias .media img {
+    width: 2vw;
+    height: 2vw;
+}
