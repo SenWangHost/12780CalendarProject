@@ -66,3 +66,9 @@ def homepage(request):
     t = get_template('homepage.html')
     html = t.render()
     return HttpResponse(html)
+
+# the view for personal profile
+def personalprofile(request):
+    t = get_template('personalprofile.html')
+    html = t.render()
+    return HttpResponse(html)

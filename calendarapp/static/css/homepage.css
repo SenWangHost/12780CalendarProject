@@ -1,6 +1,7 @@
 .side-bar {
     height: 120vh;
     padding-top: 3vh;
+    float: left;
 }
 
 .profile-image {
@@ -81,4 +82,9 @@
 .medias .media img {
     width: 2vw;
     height: 2vw;
+}
+
+.to-do-list {
+    height: 10vh;
+    float: left;
 }

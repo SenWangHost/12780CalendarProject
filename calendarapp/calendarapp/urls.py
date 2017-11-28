@@ -21,6 +21,7 @@ from calendarapp.views import register
 from calendarapp.views import homepage
 from calendarapp.views import checkUser
 from calendarapp.views import registerCheck
+from calendarapp.views import personalprofile
 admin.autodiscover()
 
 urlpatterns = [
@@ -33,5 +34,7 @@ urlpatterns = [
     url(r'^register/$', register),
     url(r'^registerCheck/$', registerCheck),
     # the home page
-    url(r'^homepage/$', homepage)
+    url(r'^homepage/$', homepage),
+    # the personal profile page
+    url(r'^personalprofile/$', personalprofile)
 ]
