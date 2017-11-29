@@ -3,7 +3,7 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Your To Do List</title>
+    <title>Your To Do List Page</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous"> {% load static %}
     <link rel="stylesheet" href="{% static 'css/todolist.css' %}">
     <script src="{% static 'js/todolist.js' %}"></script>
@@ -12,8 +12,60 @@
 <body>
     <!-- <h3 id="title">This is your homepage</h3> -->
     {% include 'sidebar.html' %}
-    <div class="to-do-list col-9">
-        This is for todolist page...
+    <div class="todolist">
+        <div class="row">
+            <div class="col-6 padding">
+                <div class="card">
+                    <h4 class="card-header">Task 1 Title</h4>
+                    <div class="card-body">
+                        <h4 class="card-title">Time:</h4>
+                        <p class="card-text"><strong>Description:</strong><br>With supporting text below as a natural lead-in to additional content.</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><strong>Location:</strong>Scott Hall B5607</li>
+                        <li class="list-group-item"><strong>Notification:</strong>Daily</li>
+                        <li class="list-group-item"><strong>Visibility:</strong>Public</li>
+                    </ul>
+                    <div class="card-body">
+                        <a href="#" class="btn btn-success">Edit This Task</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 padding">
+                <div class="card">
+                    <h4 class="card-header">Task 2 Title</h4>
+                    <div class="card-body">
+                        <h4 class="card-title">Time:</h4>
+                        <p class="card-text"><strong>Description:</strong><br>With supporting text below as a natural lead-in to additional content.</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><strong>Location:</strong>Scott Hall B5607</li>
+                        <li class="list-group-item"><strong>Notification:</strong>Daily</li>
+                        <li class="list-group-item"><strong>Visibility:</strong>Public</li>
+                    </ul>
+                    <div class="card-body">
+                        <a href="#" class="btn btn-success">Edit This Task</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 padding">
+                <div class="card">
+                    <h4 class="card-header">Task 3 Title</h4>
+                    <div class="card-body">
+                        <h4 class="card-title">Time</h4>
+                        <p class="card-text"><strong>Description:</strong><br>With supporting text below as a natural lead-in to additional content.</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><strong>Location:</strong>Scott Hall B5607</li>
+                        <li class="list-group-item"><strong>Notification:</strong>Daily</li>
+                        <li class="list-group-item"><strong>Visibility:</strong>Public</li>
+                    </ul>
+                    <div class="card-body">
+                        <a href="#" class="btn btn-success">Edit This Task</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
