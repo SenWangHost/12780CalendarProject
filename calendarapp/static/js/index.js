@@ -71,7 +71,7 @@ function login() {
                 return;
             }
             if (this.responseText == "true") {
-                window.location.href = "http://localhost:8000/homepage/";
+                window.location.href = "http://localhost:8000/todolist/";
                 return;
             }
         }

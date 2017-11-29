@@ -18,9 +18,12 @@ from django.contrib import admin
 
 from calendarapp.views import login
 from calendarapp.views import register
-from calendarapp.views import homepage
 from calendarapp.views import checkUser
 from calendarapp.views import registerCheck
+
+from calendarapp.views import todolist
+from calendarapp.views import calendar
+from calendarapp.views import friends
 from calendarapp.views import personalprofile
 admin.autodiscover()
 
@@ -33,8 +36,12 @@ urlpatterns = [
     # the register page
     url(r'^register/$', register),
     url(r'^registerCheck/$', registerCheck),
-    # the home page
-    url(r'^homepage/$', homepage),
+    # the to do list page
+    url(r'^todolist/$', todolist),
+    # the calendar page
+    url(r'^calendar/$', calendar),
+    # the friends list page
+    url(r'^friends/$', friends),
     # the personal profile page
     url(r'^personalprofile/$', personalprofile)
 ]

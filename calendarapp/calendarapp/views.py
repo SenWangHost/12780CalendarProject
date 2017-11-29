@@ -61,9 +61,21 @@ def registerCheck(request):
         newUser.save()
     return HttpResponse("true")
 
-# the view for home page
-def homepage(request):
-    t = get_template('homepage.html')
+# the view for to-do-list page
+def todolist(request):
+    t = get_template('todolist.html')
+    html = t.render()
+    return HttpResponse(html)
+
+# the view for calendar page
+def calendar(request):
+    t = get_template('calendar.html')
+    html = t.render()
+    return HttpResponse(html)
+
+# the view for friends list page
+def friends(request):
+    t = get_template('friends.html')
     html = t.render()
     return HttpResponse(html)
 
