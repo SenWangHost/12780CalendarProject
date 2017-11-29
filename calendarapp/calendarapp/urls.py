@@ -17,6 +17,7 @@ from django.conf.urls import url, include
 from django.contrib import admin
 
 from calendarapp.views import login
+from calendarapp.views import logout
 from calendarapp.views import register
 from calendarapp.views import checkUser
 from calendarapp.views import registerCheck
@@ -32,6 +33,7 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     #  the login page
     url(r'^$', login),
+    url(r'^logout/$', logout),
     url(r'^checkUser/$', checkUser),
     # the register page
     url(r'^register/$', register),

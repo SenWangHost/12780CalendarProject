@@ -6,11 +6,26 @@ from django.template import Context
 from django.shortcuts import render
 from login.models import User
 
-#  the view for homepage
+#  the view for log in page
 def login(request):
-    t = get_template('index.html')
-    html = t.render()
-    return HttpResponse(html)
+    userid = ''
+    try:
+        userid = request.session['userid']
+        print('The user has logged in!')
+        t = get_template('todolist.html')
+        html = t.render()
+        return HttpResponse(html)
+    except:
+        print('The user has not logged in!')
+        t = get_template('index.html')
+        html = t.render()
+        return HttpResponse(html)
+
+# the view for log out page
+def logout(request):
+    # delete the session information and log out
+    del request.session['userid']
+    return HttpResponse('delete')
 
 # the function for validating the user
 @csrf_exempt
@@ -32,13 +47,24 @@ def checkUser(request):
     # check whethr the password is correct
     if (password != user.password):
         return HttpResponse("Incorrect Password")
+    # save the user information in session for login purpose
+    request.session['userid'] = email
     return HttpResponse("true")
 
 # the view for register page
 def register(request):
-    t = get_template('register.html')
-    html = t.render()
-    return HttpResponse(html)
+    userid = ''
+    try:
+        userid = request.session['userid']
+        print('The user has logged in!')
+        t = get_template('todolist.html')
+        html = t.render()
+        return HttpResponse(html)
+    except:
+        print('The user has not logged in!')
+        t = get_template('register.html')
+        html = t.render()
+        return HttpResponse(html)
 
 # the function for registering user check
 @csrf_exempt
@@ -63,24 +89,60 @@ def registerCheck(request):
 
 # the view for to-do-list page
 def todolist(request):
-    t = get_template('todolist.html')
-    html = t.render()
-    return HttpResponse(html)
+    userid = ''
+    try:
+        userid = request.session['userid']
+        print('The user has logged in!')
+        t = get_template('todolist.html')
+        html = t.render()
+        return HttpResponse(html)
+    except:
+        print('The user has not logged in!')
+        t = get_template('index.html')
+        html = t.render()
+        return HttpResponse(html)
 
 # the view for calendar page
 def calendar(request):
-    t = get_template('calendar.html')
-    html = t.render()
-    return HttpResponse(html)
+    userid = ''
+    try:
+        userid = request.session['userid']
+        print('The user has logged in!')
+        t = get_template('calendar.html')
+        html = t.render()
+        return HttpResponse(html)
+    except:
+        print('The user has not logged in!')
+        t = get_template('index.html')
+        html = t.render()
+        return HttpResponse(html)
 
 # the view for friends list page
 def friends(request):
-    t = get_template('friends.html')
-    html = t.render()
-    return HttpResponse(html)
+    userid = ''
+    try:
+        userid = request.session['userid']
+        print('The user has logged in!')
+        t = get_template('friends.html')
+        html = t.render()
+        return HttpResponse(html)
+    except:
+        print('The user has not logged in!')
+        t = get_template('index.html')
+        html = t.render()
+        return HttpResponse(html)
 
 # the view for personal profile
 def personalprofile(request):
-    t = get_template('personalprofile.html')
-    html = t.render()
-    return HttpResponse(html)
+    userid = ''
+    try:
+        userid = request.session['userid']
+        print('The user has logged in!')
+        t = get_template('personalprofile.html')
+        html = t.render()
+        return HttpResponse(html)
+    except:
+        print('The user has not logged in!')
+        t = get_template('index.html')
+        html = t.render()
+        return HttpResponse(html)
