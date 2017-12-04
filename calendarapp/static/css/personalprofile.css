@@ -1,0 +1,24 @@
+.container {
+    /* padding-top: 10vh; */
+}
+
+form {
+    margin-top: 5vh;
+    margin-left: 35vw;
+}
+
+form textarea {
+    height: 15vh;
+}
+
+.title {
+    text-align: center;
+}
+
+.bioinput {
+    height: 15vh;
+}
+
+.input-group {
+    margin-left: 1vw;
+}

@@ -2,7 +2,7 @@
 from django.http import HttpResponse
 from django.template.loader import get_template
 from django.views.decorators.csrf import csrf_exempt
-from django.template import Context
+from django.template import Context, Template
 from django.shortcuts import render
 from login.models import User
 
@@ -83,7 +83,8 @@ def registerCheck(request):
         user = User.objects.get(email = email)
         return HttpResponse("exists")
     except:
-        newUser = User(email = email, password = password, firstname = firstname, lastname = lastname)
+        newUser = User(email = email, password = password, firstname = firstname, \
+            lastname = lastname)
         newUser.save()
     return HttpResponse("true")
 
@@ -135,12 +136,15 @@ def friends(request):
 # the view for personal profile
 def personalprofile(request):
     userid = ''
+    profile = request.GET.get('page')
+    print(profile)
     try:
         userid = request.session['userid']
         print('The user has logged in!')
-        t = get_template('personalprofile.html')
-        html = t.render()
-        return HttpResponse(html)
+    # t = Template('personalprofile.html')
+    # c = Context({'profile': profile})
+    # html = t.render(c)
+        return render(request, 'personalprofile.html', {'profile':profile})
     except:
         print('The user has not logged in!')
         t = get_template('index.html')

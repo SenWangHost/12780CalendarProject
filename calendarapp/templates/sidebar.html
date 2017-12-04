@@ -1,59 +1,63 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<!-- <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"> -->
+<!-- <html>
 
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Home Page</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous"> {% load static %}
+<head> -->
+<!-- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> -->
+<!-- <title>Home Page</title> -->
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">  -->
+<!-- {% load static %}
     <link rel="stylesheet" href="{% static 'css/sidebar.css' %}">
     <script src="{% static 'js/sidebar.js' %}"></script>
-</head>
+</head> -->
 
-<body>
-    <!-- <h3 id="title">This is your homepage</h3> -->
-    <div class="side-bar bg-dark col-3">
-        <div class="profile-image"><img src="{% static 'images/profile-image.png' %}"></div>
-        <div class="name text-white">Sen Wang</div>
-        <div class="motto text-white">Never Give Up and Look Forward</div>
-        <table class="buttons">
-            <tr>
-                <td class="icon-row"><img class="icon" src="{% static 'images/tasks-icon-green.png' %}"></td>
-                <td><a href="../todolist/">Your To-Do-List</a></td>
-            </tr>
-            <tr>
-                <td class="icon-row"><img class="icon" src="{% static 'images/calendar-icon.png' %}"></td>
-                <td><a href="../calendar/">Your Calendar</a></td>
-            </tr>
-            <tr>
-                <td class="icon-row"><img class="icon" src="{% static 'images/friends-icon.png' %}"></td>
-                <td><a href="../friends/">Your Friends</a></td>
-            </tr>
-            <tr>
-                <td class="icon-row"><img class="icon" src="{% static 'images/tasks-icon.png' %}"></td>
-                <td><a href="../personalprofile/">Edit Your Profile</a></td>
-            </tr>
-            <tr>
-                <td class="icon-row"><img class="icon" src="{% static 'images/tasks-icon.png' %}"></td>
-                <td>
-                    <a href="../" onclick="logout()">Log Out</a>
-                </td>
-            </tr>
-        </table>
-        <div class="medias">
-            <a href="">
-                <div class="media"><img src="{% static 'images/facebook.png' %}"></div>
-            </a>
-            <a href="">
-                <div class="media"><img src="{% static 'images/twitter.png' %}"></div>
-            </a>
-            <a href="">
-                <div class="media"><img src="{% static 'images/linkedin.png' %}"></div>
-            </a>
-        </div>
+<!-- <body> -->
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/sidebar.css' %}">
+<script src="{% static 'js/sidebar.js' %}"></script>
+<!-- <h3 id="title">This is your homepage</h3> -->
+<div class="side-bar bg-dark col-3">
+    <div class="profile-image"><img src="{% static 'images/profile-image.png' %}"></div>
+    <div class="name text-white">Sen Wang</div>
+    <div class="motto text-white">Never Give Up and Look Forward</div>
+    <table class="buttons">
+        <tr>
+            <td class="icon-row"><img class="icon" src="{% static 'images/tasks-icon.png' %}"></td>
+            <td><a href="../todolist/">Your To-Do-List</a></td>
+        </tr>
+        <tr>
+            <td class="icon-row"><img class="icon" src="{% static 'images/calendar-icon.png' %}"></td>
+            <td><a href="../calendar/">Your Calendar</a></td>
+        </tr>
+        <tr>
+            <td class="icon-row"><img class="icon" src="{% static 'images/friends-icon.png' %}"></td>
+            <td><a href="../friends/">Your Friends</a></td>
+        </tr>
+        <tr>
+            <td class="icon-row"><img class="icon" src="{% static 'images/personal-profile.png' %}"></td>
+            <td><a href="../personalprofile/?page=profile">Edit Your Profile</a></td>
+        </tr>
+        <tr>
+            <td class="icon-row"><img class="icon" src="{% static 'images/tasks-icon.png' %}"></td>
+            <td>
+                <a href="../" onclick="logout()">Log Out</a>
+            </td>
+        </tr>
+    </table>
+    <div class="medias">
+        <a href="">
+            <div class="media"><img src="{% static 'images/facebook.png' %}"></div>
+        </a>
+        <a href="">
+            <div class="media"><img src="{% static 'images/twitter.png' %}"></div>
+        </a>
+        <a href="">
+            <div class="media"><img src="{% static 'images/linkedin.png' %}"></div>
+        </a>
     </div>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
-</body>
+</div>
+<!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> -->
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script> -->
+<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script> -->
+<!-- </body>
 
-</html>
+</html> -->

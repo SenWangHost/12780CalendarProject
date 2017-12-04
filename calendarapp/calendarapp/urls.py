@@ -45,5 +45,5 @@ urlpatterns = [
     # the friends list page
     url(r'^friends/$', friends),
     # the personal profile page
-    url(r'^personalprofile/$', personalprofile)
+    url(r'^personalprofile/', personalprofile)
 ]

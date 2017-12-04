@@ -7,13 +7,102 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous"> {% load static %}
     <link rel="stylesheet" href="{% static 'css/personalprofile.css' %}">
     <script src="{% static 'js/personalprofile.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/sidebar.css' %}">
+    <script src="{% static 'js/sidebar.js' %}"></script>
 </head>
 
 <body>
     <!-- <h3 id="title">This is your homepage</h3> -->
     {% include 'sidebar.html' %}
-    <div class="to-do-list col-9">
-        This is for personal profile page...
+    <div>
+        <!-- <h3 class="title">Edit Your Personal Profile Below</h3> -->
+        <!-- this is the nav bar section -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="">
+                <img src="{% static 'images/personal-profile.png' %}" width="30" height="30" alt="">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    {% if profile == 'profile' %}
+                    <li class="nav-item active">
+                        <a class="nav-link" href="./?page=profile">Profile
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./?page=security">Security
+                        </a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="./?page=profile">Profile
+                            </a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="./?page=security">Security
+                            </a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
+        {% if profile == 'profile' %}
+        <form class="col-6">
+            <div class="form-group">
+                <label for="username">Username(main email address)</label>
+                <input type="email" class="form-control" id="username" placeholder="senw@andrew.cmu.edu" readonly>
+            </div>
+            <div class="form-group">
+                <label for="alteremail">Alternative Email Address</label>
+                <input type="email" class="form-control" id="alteremail" placeholder="email@example.com">
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="firstname">First Name</label>
+                    <input type="text" class="form-control" id="firstname">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="lastname">Last Name</label>
+                    <input type="text" class="form-control" id="lastname">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="motto">Your Motto</label>
+                <input type="text" class="form-control" id="motto" placeholder="A sentence defines your spirit">
+            </div>
+            <div class="form-group">
+                <label for="bio">Your Bio</label>
+                <textarea class="form-control" id="bio" placeholder="Tell us a little bit about yourself"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="url">Personal Website URL</label>
+                <input type="text" class="form-control" id="url" placeholder="http://www.example.com">
+            </div>
+            <div class="form-group">
+                <label for="company">Company/University/Agency</label>
+                <input type="text" class="form-control" id="company">
+            </div>
+            <button type="submit" class="btn btn-success">Update Your Profile</button>
+        </form>
+        {% else %}
+        <form class="col-6">
+            <div class="form-group">
+                <label for="currpassword">Current Password</label>
+                <input type="password" class="form-control" id="currpassword">
+            </div>
+            <div class="form-group">
+                <label for="newpassword1">New Password</label>
+                <input type="password" class="form-control" id="newpassword1">
+            </div>
+            <div class="form-group">
+                <label for="newpassword2">Confirm New Password</label>
+                <input type="password" class="form-control" id="newpassword2">
+            </div>
+            <button type="submit" class="btn btn-danger">Change Your Password</button>
+        </form>
+        {% endif %}
     </div>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
