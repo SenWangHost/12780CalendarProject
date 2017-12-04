@@ -94,9 +94,11 @@ def todolist(request):
     try:
         userid = request.session['userid']
         print('The user has logged in!')
-        t = get_template('todolist.html')
-        html = t.render()
-        return HttpResponse(html)
+        pinfo = getPeronalInfo(userid)
+        name = pinfo[0]
+        motto = pinfo[1]
+        params = {'name':name, 'motto':motto}
+        return render(request, 'todolist.html', params)
     except:
         print('The user has not logged in!')
         t = get_template('index.html')
@@ -109,9 +111,11 @@ def calendar(request):
     try:
         userid = request.session['userid']
         print('The user has logged in!')
-        t = get_template('calendar.html')
-        html = t.render()
-        return HttpResponse(html)
+        pinfo = getPeronalInfo(userid)
+        name = pinfo[0]
+        motto = pinfo[1]
+        params = {'name':name, 'motto':motto}
+        return render(request, 'calendar.html', params)
     except:
         print('The user has not logged in!')
         t = get_template('index.html')
@@ -124,9 +128,11 @@ def friends(request):
     try:
         userid = request.session['userid']
         print('The user has logged in!')
-        t = get_template('friends.html')
-        html = t.render()
-        return HttpResponse(html)
+        pinfo = getPeronalInfo(userid)
+        name = pinfo[0]
+        motto = pinfo[1]
+        params = {'name':name, 'motto':motto}
+        return render(request, 'friends.html', params)
     except:
         print('The user has not logged in!')
         t = get_template('index.html')
@@ -136,17 +142,31 @@ def friends(request):
 # the view for personal profile
 def personalprofile(request):
     userid = ''
+    # use for page routing
     profile = request.GET.get('page')
     print(profile)
     try:
         userid = request.session['userid']
         print('The user has logged in!')
+        pinfo = getPeronalInfo(userid)
+        name = pinfo[0]
+        motto = pinfo[1]
+        # pack them into params dictionary
+        params = {'profile':profile, 'name': name, 'motto':motto}
     # t = Template('personalprofile.html')
     # c = Context({'profile': profile})
     # html = t.render(c)
-        return render(request, 'personalprofile.html', {'profile':profile})
+        return render(request, 'personalprofile.html', params)
     except:
         print('The user has not logged in!')
         t = get_template('index.html')
         html = t.render()
         return HttpResponse(html)
+
+# the helper function to get personal information with userid
+# return a list of results
+def getPeronalInfo(userid):
+    userObject = User.objects.get(email = userid)
+    name = userObject.firstname + ' ' + userObject.lastname
+    motto = userObject.motto
+    return [name, motto]
