@@ -123,17 +123,21 @@ def calendar(request):
         return HttpResponse(html)
 
 # the view for friends list page
+@csrf_exempt
 def friends(request):
     userid = ''
+    # use for page routing
+    page = request.GET.get('page')
+    print(page)
     try:
         userid = request.session['userid']
         print('The user has logged in!')
         pinfo = getPeronalInfo(userid)
         name = pinfo[0]
         motto = pinfo[1]
-        params = {'name':name, 'motto':motto}
+        params = {'name':name, 'motto':motto , 'page':page}
         return render(request, 'friends.html', params)
-    except:
+    except KeyError:
         print('The user has not logged in!')
         t = get_template('index.html')
         html = t.render()
