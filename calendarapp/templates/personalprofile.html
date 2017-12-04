@@ -7,11 +7,9 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous"> {% load static %}
     <link rel="stylesheet" href="{% static 'css/personalprofile.css' %}">
     <script src="{% static 'js/personalprofile.js' %}"></script>
-    <link rel="stylesheet" href="{% static 'css/sidebar.css' %}">
-    <script src="{% static 'js/sidebar.js' %}"></script>
 </head>
 
-<body>
+<body onload="editButtonEffect();">
     <!-- <h3 id="title">This is your homepage</h3> -->
     {% include 'sidebar.html' %}
     <div>
@@ -49,56 +47,81 @@
             </div>
         </nav>
         {% if profile == 'profile' %}
-        <form class="col-6">
+        <form class="col-6" method="POST" action="./?page=profile">
             <div class="form-group">
                 <label for="username">Username(main email address)</label>
-                <input type="email" class="form-control" id="username" placeholder="senw@andrew.cmu.edu" readonly>
+                <input type="email" class="form-control" id="username" placeholder="{{email}}" readonly>
             </div>
             <div class="form-group">
                 <label for="alteremail">Alternative Email Address</label>
-                <input type="email" class="form-control" id="alteremail" placeholder="email@example.com">
+                <input type="email" class="form-control" id="alteremail" name="alteremail" value="{{alteremail}}" readonly>
+                <button class="btn btn-outline-primary col-2" id="alteremailbu" type="button">Edit</button>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="firstname">First Name</label>
-                    <input type="text" class="form-control" id="firstname">
+                    <input type="text" class="form-control" id="firstname" name="firstname" value="{{firstname}}" readonly>
+                    <button class="btn btn-outline-primary" id="firstnamebu" type="button">Edit</button>
                 </div>
                 <div class="form-group col-md-6">
                     <label for="lastname">Last Name</label>
-                    <input type="text" class="form-control" id="lastname">
+                    <input type="text" class="form-control" id="lastname" name="lastname" value="{{lastname}}" readonly>
+                    <button class="btn btn-outline-primary" id="lastnamebu" type="button">Edit</button>
                 </div>
             </div>
             <div class="form-group">
                 <label for="motto">Your Motto</label>
-                <input type="text" class="form-control" id="motto" placeholder="A sentence defines your spirit">
+                <input type="text" class="form-control" id="motto" name="motto" value="{{motto}}" readonly>
+                <button class="btn btn-outline-primary col-2" id="mottobu" type="button">Edit</button>
             </div>
             <div class="form-group">
                 <label for="bio">Your Bio</label>
-                <textarea class="form-control" id="bio" placeholder="Tell us a little bit about yourself"></textarea>
+                <textarea class="form-control" id="bio" name="bio" value="{{bio}}" readonly>{{bio}}</textarea>
+                <button class="btn btn-outline-primary col-2" id="biobu" type="button">Edit</span></button>
             </div>
             <div class="form-group">
                 <label for="url">Personal Website URL</label>
-                <input type="text" class="form-control" id="url" placeholder="http://www.example.com">
+                <input type="text" class="form-control" id="url" name="url" value="{{url}}" readonly>
+                <button class="btn btn-outline-primary col-2" id="urlbu" type="button">Edit</span></button>
             </div>
             <div class="form-group">
                 <label for="company">Company/University/Agency</label>
-                <input type="text" class="form-control" id="company">
+                <input type="text" class="form-control" id="company" name="company" value="{{company}}" readonly>
+                <button class="btn btn-outline-primary col-2" id="companybu" type="button">Edit</span></button>
             </div>
             <button type="submit" class="btn btn-success">Update Your Profile</button>
         </form>
+        <!-- <div class="form-group">
+            <button type="submit" class="btn btn-success">Update Your Profile</button>
+        </div> -->
         {% else %}
-        <form class="col-6">
+        <form class="col-6" method="POST" action="./?page=security">
+            {% if success %}
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Your password has been changed successfully!</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            {% endif %} {% for error in errors %}
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>Error!</strong>{{error}}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            {% endfor %}
             <div class="form-group">
                 <label for="currpassword">Current Password</label>
-                <input type="password" class="form-control" id="currpassword">
+                <input type="password" class="form-control" id="currpassword" name="currpassword">
             </div>
             <div class="form-group">
                 <label for="newpassword1">New Password</label>
-                <input type="password" class="form-control" id="newpassword1">
+                <input type="password" class="form-control" id="newpassword1" name="newpassword1">
             </div>
             <div class="form-group">
                 <label for="newpassword2">Confirm New Password</label>
-                <input type="password" class="form-control" id="newpassword2">
+                <input type="password" class="form-control" id="newpassword2" name="newpassword2">
             </div>
             <button type="submit" class="btn btn-danger">Change Your Password</button>
         </form>

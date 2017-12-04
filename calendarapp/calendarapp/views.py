@@ -140,28 +140,74 @@ def friends(request):
         return HttpResponse(html)
 
 # the view for personal profile
+@csrf_exempt
 def personalprofile(request):
     userid = ''
     # use for page routing
     profile = request.GET.get('page')
     print(profile)
+    # for error message
+    errors = []
+    success = False
     try:
         userid = request.session['userid']
         print('The user has logged in!')
+        # handle the post request
+        if (request.method == "POST" and profile == 'profile'):
+            alteremail = request.POST.get('alteremail', '')
+            firstname = request.POST.get('firstname', '')
+            lastname = request.POST.get('lastname', '')
+            motto = request.POST.get('motto', '')
+            bio = request.POST.get('bio', '')
+            url = request.POST.get('url', '')
+            company = request.POST.get('company', '')
+            # update the personal information
+            User.objects.filter(email = userid).update(alteremail = alteremail, \
+            firstname = firstname, lastname = lastname, motto = motto, bio = bio, url = url, company = company)
+        elif (request.method == 'POST' and profile == 'security'):
+            currpassword = request.POST.get('currpassword', '')
+            newpassword1 = request.POST.get('newpassword1', '')
+            newpassword2 = request.POST.get('newpassword2', '')
+            print(currpassword)
+            print(newpassword1)
+            print(newpassword2)
+            userObject = User.objects.get(email = userid)
+            if (userObject.password != currpassword):
+                errors.append('Incorrect current password!')
+            if (newpassword1 == None or newpassword1 == ''):
+                errors.append('New password cannot be empty!')
+            if (newpassword1 != newpassword2):
+                errors.append("Confirmed new password doesn't match with new password!")
+            if (len(errors) == 0):
+                User.objects.filter(email = userid).update(password = newpassword1)
+                success = True
         pinfo = getPeronalInfo(userid)
         name = pinfo[0]
         motto = pinfo[1]
+        # get additional information
+        userObject = User.objects.get(email = userid)
+        email = userObject.email
+        alteremail = userObject.alteremail
+        firstname = userObject.firstname
+        lastname = userObject.lastname
+        motto = userObject.motto
+        bio = userObject.bio
+        url = userObject.url
+        company = userObject.company
         # pack them into params dictionary
-        params = {'profile':profile, 'name': name, 'motto':motto}
+        params = {'profile':profile, 'name': name, 'motto':motto, 'email':email,\
+         'firstname':firstname, 'lastname':lastname, 'alteremail':alteremail, 'motto':motto,\
+         'bio':bio, 'url':url, 'company':company ,'errors': errors ,'success': success}
     # t = Template('personalprofile.html')
     # c = Context({'profile': profile})
     # html = t.render(c)
         return render(request, 'personalprofile.html', params)
-    except:
+    except KeyError:
         print('The user has not logged in!')
         t = get_template('index.html')
         html = t.render()
         return HttpResponse(html)
+
 
 # the helper function to get personal information with userid
 # return a list of results
