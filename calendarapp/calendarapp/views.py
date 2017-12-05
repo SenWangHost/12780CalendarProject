@@ -5,6 +5,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.template import Context, Template
 from django.shortcuts import render
 from login.models import User
+from friends.models import Friend
 
 #  the view for log in page
 def login(request):
@@ -86,6 +87,8 @@ def registerCheck(request):
         newUser = User(email = email, password = password, firstname = firstname, \
             lastname = lastname)
         newUser.save()
+        # save the user information in session for login purpose
+        request.session['userid'] = email
     return HttpResponse("true")
 
 # the view for to-do-list page
@@ -99,7 +102,7 @@ def todolist(request):
         motto = pinfo[1]
         params = {'name':name, 'motto':motto}
         return render(request, 'todolist.html', params)
-    except:
+    except KeyError:
         print('The user has not logged in!')
         t = get_template('index.html')
         html = t.render()
@@ -116,7 +119,7 @@ def calendar(request):
         motto = pinfo[1]
         params = {'name':name, 'motto':motto}
         return render(request, 'calendar.html', params)
-    except:
+    except KeyError:
         print('The user has not logged in!')
         t = get_template('index.html')
         html = t.render()
@@ -129,13 +132,52 @@ def friends(request):
     # use for page routing
     page = request.GET.get('page')
     print(page)
+    searchresult = None
+    errors = []
+    friends = []
     try:
         userid = request.session['userid']
         print('The user has logged in!')
         pinfo = getPeronalInfo(userid)
         name = pinfo[0]
         motto = pinfo[1]
-        params = {'name':name, 'motto':motto , 'page':page}
+        if (request.method == "POST" and page == 'add'):
+            searchemail = request.POST.get('searchemail', '')
+            print(searchemail)
+            if (searchemail == None or searchemail == ''):
+                errors.append('Input search email is empty!')
+            else:
+                try:
+                    result = User.objects.get(email = searchemail)
+                    if (result.email == userid):
+                        errors.append("This is your own email address!")
+                    else:
+                        searchresult = result;
+                except User.DoesNotExist:
+                    errors.append("We don't have the record of this email address")
+        if (request.method == "POST" and page == 'current'):
+            femail = request.POST.get('femail', '')
+            firstnameF = request.POST.get('firstname', '')
+            lastnameF = request.POST.get('lastname', '')
+            mottoF = request.POST.get('motto', '')
+            bioF = request.POST.get('bio', '')
+            # print(femail)
+            # print(firstnameF)
+            # print(lastnameF)
+            # print(mottoF)
+            # print(bioF)
+            newFriend = Friend(owner = userid, friendemail = femail, \
+                firstname = firstnameF, lastname = lastnameF, bio = bioF, motto = mottoF)
+            # save the new friend object to the database.
+            newFriend.save()
+            print('New Friend is saved into database!')
+        # fecth the all posiblile friend and pack them into list
+        friendsSet = Friend.objects.filter(owner = userid)
+        for entry in friendsSet:
+            print(entry.friendemail)
+            friendData = User.objects.get(email = entry.friendemail)
+            friends.append(friendData)
+        params = {'name':name, 'motto':motto , 'page':page, 'errors': errors, 'searchresult': searchresult, 'friends':friends}
         return render(request, 'friends.html', params)
     except KeyError:
         print('The user has not logged in!')

@@ -46,12 +46,63 @@
         </nav>
     </div>
     {% if page == 'current' %}
-    <div>
-        <p>This is current friend list page</p>
+    <div class="friends-list col-9">
+        {% for friend in friends %}
+        <div class="card hovereffect">
+            <img class="card-img-top" src="{% static 'images/friends.jpeg' %}" alt="Card image cap" width="350" height="180">
+            <div class="card-body">
+                <h4 class="card-title">{{friend.firstname}} {{friend.lastname}}</h4>
+                <h6 class="card-subtitle mb-2 text-muted">{{friend.motto}}</h6>
+                <p class="card-text">{{friend.bio}}</p>
+                <a href="#" class="btn btn-primary">Start A Chat</a>
+            </div>
+        </div>
+        {% endfor %}
     </div>
     {% else %}
-    <div>
-        <p>This is the add friend page</p>
+    <div class="add-friend col-9">
+        <form class="col-8 formstyle" method="POST" action="./?page=add">
+            {% for error in errors %}
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>Error!</strong>{{error}}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+            </div>
+            {% endfor %}
+            <div class="form-group">
+                <label for="searchemail">Email Address:</label>
+                <input type="email" class="form-control" id="searchemail" name="searchemail" placeholder="Enter Your Friend's Email">
+            </div>
+            <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+        {% if searchresult %}
+        <form class="col-8 formstyle" method="POST" action="./?page=current">
+            <div class="form-group">
+                <label for="femail">Friend's Email Address:</label>
+                <input type="email" class="form-control" id="femail" name="femail" value="{{searchresult.email}}" readonly>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="firstname">First Name</label>
+                    <input type="text" class="form-control" id="firstname" name="firstname" value="{{searchresult.firstname}}" readonly>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="lastname">Last Name</label>
+                    <input type="text" class="form-control" id="lastname" name="lastname" value="{{searchresult.lastname}}" readonly>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="motto">Friend's Motto</label>
+                <input type="text" class="form-control" id="motto" name="motto" value="{{searchresult.motto}}" readonly>
+            </div>
+            <div class="form-group">
+                <label for="bio">Friend's Bio</label>
+                <textarea class="form-control" id="bio" name="bio" readonly>{{searchresult.bio}}</textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Add A Contact</button>
+        </form>
+        {% endif %}
     </div>
     {% endif %}
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

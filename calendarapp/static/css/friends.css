@@ -1,0 +1,26 @@
+.friends-list {
+    padding-top: 10vh;
+    padding-left: 1vw;
+    padding-right: 1vw;
+    margin-left: 25vw;
+}
+
+.card {
+    width: 18em;
+    display: inline-block;
+    margin-left: 1vw;
+    margin-right: 1vw;
+    margin-bottom: 4vh;
+}
+
+.hovereffect:hover {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.add-friend {
+    margin-left: 25vw;
+}
+
+.formstyle {
+    margin: 3vh auto;
+}
