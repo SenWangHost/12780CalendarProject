@@ -31,8 +31,86 @@
             </ul>
         </div>
     </nav>
+    <button id="testbutton" onclick="testAdd();">Test add event</button>
+    <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+        Launch demo modal
+      </button> -->
     <div id='calendar'>
 
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add A Task</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="taskTitle" class="col-form-label font-weight-bold">Task Title:<span style="color:red">*</span></label>
+                            <input type="text" class="form-control" id="taskTitle" name="taskTitle">
+                        </div>
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                  <input type="checkbox" class="form-check-input" id="allDay" name="allDay" onchange="disableTime();">
+                                  All Day/Long Range Event
+                                </label>
+                        </div>
+                        <div class="form-group">
+                            <label for="startDate" class="col-form-label font-weight-bold">Start Date:<span style="color:red">*</span></label>
+                            <input type="date" class="form-control" id="startDate" name="startDate">
+                        </div>
+                        <div class="form-group">
+                            <label for="startTime" class="col-form-label font-weight-bold">Start Time:<span style="color:red">*</span></label>
+                            <input type="text" class="form-control" id="startTime" name="startTime" placeholder="14:30:00">
+                        </div>
+                        <div class="form-group">
+                            <label for="endDate" class="col-form-label font-weight-bold">End Date:<span style="color:red">*</span></label>
+                            <input type="date" class="form-control" id="endDate" name="endDate">
+                        </div>
+                        <div class="form-group">
+                            <label for="endTime" class="col-form-label font-weight-bold">End Time:<span style="color:red">*</span></label>
+                            <input type="text" class="form-control" id="endTime" name="endTime" placeholder="16:30:00">
+                        </div>
+                        <div class="form-group">
+                            <label for="description" class="col-form-label font-weight-bold">Description:</label>
+                            <textarea type="text" class="form-control" id="description" name="description"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="location" class="col-form-label font-weight-bold">Location:</label>
+                            <input type="text" class="form-control" id="location" name="location">
+                        </div>
+                        <label class="col-form-label font-weight-bold">Importance Of Your Task</label><br>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                  <input class="form-check-input" type="radio" name="color" id="color" value="red" checked>
+                                  Important
+                                </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                  <input class="form-check-input" type="radio" name="color" id="color" value="yellow">
+                                  Normal
+                                </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                  <input class="form-check-input" type="radio" name="color" id="color" value="green">
+                                  Flexible
+                                </label>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="addTask();">Close</button>
+                    <button type="button" class="btn btn-success">Add Your Task</button>
+                </div>
+            </div>
+        </div>
     </div>
     <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
