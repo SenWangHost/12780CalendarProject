@@ -62,12 +62,18 @@ function initializeCalendar() {
 
             // alert('Event: ' + calEvent.title);
             // alert('Event:' + calEvent.description);
-            // alert(calEvent.start);
-            // alert(calEvent.end);
+            // console.log(calEvent.title);
+            // console.log(calEvent.description);
+            // console.log(calEvent.location);
+            // console.log(calEvent.allDay);
+            // console.log(calEvent.start._i);
+            // console.log(calEvent.end._i);
             // alert(calEvent.location);
             // alert(calEvent.color);
             // alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
             // alert('View: ' + view.name);
+            editButtonEffect();
+            loadValueFromEvent(calEvent);
             $('#updateDeleteModal').modal('toggle');
             // change the border color just for fun
             // $(this).css('border-color', 'red');
@@ -240,4 +246,63 @@ function addTask() {
             }
         }
     };
+}
+
+// the function add edit button effect
+function editButtonEffect() {
+    document.getElementById("taskTitleUB").onclick = function() {
+        document.getElementById("taskTitleU").readOnly = false;
+    };
+    document.getElementById("startDateUB").onclick = function() {
+        document.getElementById("startDateU").readOnly = false;
+    };
+    document.getElementById("startTimeUB").onclick = function() {
+        document.getElementById("startTimeU").readOnly = false;
+    };
+    document.getElementById("endDateUB").onclick = function() {
+        document.getElementById("endDateU").readOnly = false;
+    };
+    document.getElementById("endTimeUB").onclick = function() {
+        document.getElementById("endTimeU").readOnly = false;
+    };
+    document.getElementById("descriptionUB").onclick = function() {
+        document.getElementById("descriptionU").readOnly = false;
+    };
+    document.getElementById("locationUB").onclick = function() {
+        document.getElementById("locationU").readOnly = false;
+    };
+}
+
+// the function to get current value from the calendar event
+function loadValueFromEvent(calEvent) {
+    document.getElementById("taskTitleU").value = calEvent.title;
+    document.getElementById("descriptionU").value = calEvent.description;
+    document.getElementById("locationU").value = calEvent.location;
+    // set the color radio box to be checked
+    if (calEvent.color == 'red') {
+        document.getElementById("colorU1").checked = true;
+    } else if (calEvent.color == 'yellow') {
+        document.getElementById("colorU2").checked = true;
+    } else if (calEvent.color == 'green') {
+        document.getElementById("colorU3").checked = true;
+    }
+    if (calEvent.start._i.indexOf('T') != -1) {
+        var temp = calEvent.start._i.split('T');
+        document.getElementById("startDateU").value = temp[0];
+        document.getElementById("startTimeU").value = temp[1];
+    } else {
+        document.getElementById("startDateU").value = calEvent.start._i;
+    }
+    if (calEvent.allDay) {
+        document.getElementById("allDayU").checked = true;
+    } else {
+        document.getElementById("allDayU").checked = true;
+        if (calEvent.end._i.indexOf('T') != -1) {
+            var temp2 = calEvent.end._i.split('T');
+            document.getElementById("endDateU").value = temp2[0];
+            document.getElementById("endTimeU").value = temp2[1];
+        } else {
+            document.getElementById("endDateU").value = calEvent.end._i;
+        }
+    }
 }

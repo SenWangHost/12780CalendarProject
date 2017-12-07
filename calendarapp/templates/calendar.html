@@ -172,7 +172,7 @@
                     <div class="input-group">
                         <input type="text" class="form-control" id="endTimeU" readonly>
                         <span class="input-group-btn">
-                            <button class="btn btn-outline-primary" id="endTimeU" type="button">Edit</button>
+                            <button class="btn btn-outline-primary" id="endTimeUB" type="button">Edit</button>
                         </span>
                     </div>
                     <div class="form-group">
@@ -192,7 +192,7 @@
                     <label class="col-form-label font-weight-bold">Importance Of Your Task:</label><br>
                     <div class="form-check form-check-inline">
                         <label class="form-check-label">
-                            <input class="form-check-input" type="radio" name="colorU" id="colorU1" value="red" checked>
+                            <input class="form-check-input" type="radio" name="colorU" id="colorU1" value="red">
                             Important
                         </label>
                     </div>
@@ -211,7 +211,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-outline-danger">Delete Your Task</button>
+                    <button type="button" class="btn btn-outline-danger" onclick="deleteTask();">Delete Your Task</button>
                     <button type="button" class="btn btn-outline-success">Update Your Task</button>
                 </div>
             </div>
