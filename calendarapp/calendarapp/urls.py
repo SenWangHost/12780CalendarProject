@@ -26,6 +26,7 @@ from calendarapp.views import todolist
 from calendarapp.views import calendar
 from calendarapp.views import friends
 from calendarapp.views import personalprofile
+from calendarapp.views import addTask
 admin.autodiscover()
 
 urlpatterns = [
@@ -42,6 +43,7 @@ urlpatterns = [
     url(r'^todolist/$', todolist),
     # the calendar page
     url(r'^calendar/$', calendar),
+    url(r'^addTask/$', addTask),
     # the friends list page
     url(r'^friends/$', friends),
     # the personal profile page

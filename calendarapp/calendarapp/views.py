@@ -6,6 +6,7 @@ from django.template import Context, Template
 from django.shortcuts import render
 from login.models import User
 from friends.models import Friend
+import json
 
 #  the view for log in page
 def login(request):
@@ -126,6 +127,32 @@ def calendar(request):
         t = get_template('index.html')
         html = t.render()
         return HttpResponse(html)
+
+# the function for adding the task to the database
+@csrf_exempt
+def addTask(request):
+    if (request.method == "POST"):
+        data = json.loads(request.body)
+        title = data['title']
+        allDay = data['allday']
+        startDate = data['startDate']
+        endDate = data['endDate']
+        startTime = data['startTime']
+        endTime = data['endTime']
+        description = data['description']
+        location = data['location']
+        color = data['color']
+        print(title)
+        print(allDay)
+        print(startDate)
+        print(startTime)
+        print(endDate)
+        print(endTime)
+        print(description)
+        print(location)
+        print(color)
+
+        return HttpResponse("OK")
 
 # the view for friends list page
 @csrf_exempt

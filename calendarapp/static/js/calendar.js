@@ -80,12 +80,6 @@ function validateInput() {
     var startTime = document.getElementById('startTime').value;
     var endDate = document.getElementById('endDate').value;
     var endTime = document.getElementById('endTime').value;
-    console.log(title);
-    console.log(allday);
-    console.log(startDate);
-    console.log(startTime);
-    console.log(endDate);
-    console.log(endTime);
     if (title == null || title == '') {
         message = errorMessageF + "Your task title cannot be empty!" + errorMessageB;
         document.getElementById("errorField").innerHTML = message;
@@ -141,5 +135,31 @@ function addTask() {
     if (!validateInput()) {
         return;
     }
+    // get all inputs from the form
+    var title = document.getElementById('taskTitle').value;
+    var allday = document.getElementById('allDay').checked;
+    var startDate = document.getElementById('startDate').value;
+    var startTime = document.getElementById('startTime').value;
+    var endDate = document.getElementById('endDate').value;
+    var endTime = document.getElementById('endTime').value;
+    var description = document.getElementById('description').value;
+    var location = document.getElementById('location').value;
+    var color = document.getElementById('color').value;
+    // send ajax request
+    var xhttp = new XMLHttpRequest();
+    var params = {
+        title: title,
+        allday: allday,
+        startDate: startDate,
+        startTime: startTime,
+        endDate: endDate,
+        endTime: endTime,
+        description: description,
+        location: location,
+        color: color
+    };
+    xhttp.open("POST", "http://localhost:8000/addTask/", true);
+    xhttp.setRequestHeader("Content-Type", "application/json");
+    xhttp.send(JSON.stringify(params));
 
 }
