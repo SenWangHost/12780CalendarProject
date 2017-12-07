@@ -132,6 +132,11 @@ def calendar(request):
 # the function for adding the task to the database
 @csrf_exempt
 def addTask(request):
+    userid = '';
+    try:
+        userid = request.session['userid']
+    except KeyError:
+        return HttpResponse("UNAUTHORIZED")
     if (request.method == "POST"):
         data = json.loads(request.body)
         title = data['title']
@@ -152,7 +157,7 @@ def addTask(request):
         print(description)
         print(location)
         print(color)
-        newTask = Task(title = title, allDay = allDay, startDate = startDate, \
+        newTask = Task(title = title, owner = userid,allDay = allDay, startDate = startDate, \
                 color = color, startTime = startTime, endDate = endDate, \
                 endTime = endTime, description = description, location = location)
         newTask.save()

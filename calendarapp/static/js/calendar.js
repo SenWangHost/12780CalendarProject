@@ -16,14 +16,17 @@ $(document).ready(function() {
         defaultView: 'month',
         editable: true,
         events: eventsArray,
-        eventColor: '#00903B',
         dayClick: function(date, jsEvent, view) {
-            // alert('Clicked on: ' + date.format());
-
+            console.log('Clicked on: ' + date.format());
+            console.log('Current view: ' + view.name);
             // alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
-
-            // alert('Current view: ' + view.name);
-
+            if (view.name == "month") {
+                document.getElementById('startDate').value = date.format();
+            } else {
+                temp = date.format().split('T');
+                document.getElementById('startDate').value = temp[0];
+                document.getElementById('startTime').value = temp[1];
+            }
             $('#exampleModal').modal('toggle');
 
             // change the day's background color just for fun
@@ -178,6 +181,17 @@ function addTask() {
             if (this.responseText == "SAVED") {
                 addTaskToCalendar(title, allday, startDate, startTime, endDate, endTime, description, location, color);
                 $('#exampleModal').modal('toggle');
+                return;
+            }
+            if (this.responseText == "UNANTHORIZED") {
+                alert("You are not logged in, you will be redirected to the log in page!");
+                window.location.href = "http://localhost:8000";
+                return;
+            }
+            if (this.responseText == "FAILED") {
+                alert("error happened");
+                window.location.href = "http://localhost:8000";
+                return;
             }
         }
     };
