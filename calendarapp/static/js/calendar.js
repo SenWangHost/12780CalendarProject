@@ -1,11 +1,36 @@
-var eventsArray = [{
-    title: 'Event1',
-    start: '2017-12-04',
-    textColor: 'white'
-}];
+var eventsArray = [];
 
 $(document).ready(function() {
+    // load the tasks from the database
+    loadTasksFromDatabase();
+    console.log(eventsArray);
+    setTimeout(function() {
+        initializeCalendar();
+    }, 800);
+});
 
+function loadTasksFromDatabase() {
+    // make ajax request for fetching the data
+    xhttp = new XMLHttpRequest();
+    xhttp.open("GET", "http://localhost:8000/getTasks/", true);
+    xhttp.send();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            console.log(this.responseText);
+            if (this.responseText == 'UNANTHORIZED') {
+                alert("You are not logged in, you will be redirected to the log in page!");
+                window.location.href = "http://localhost:8000";
+                return;
+            } else {
+                eventsArray = JSON.parse(this.responseText);
+                console.log(eventsArray);
+                return;
+            }
+        }
+    };
+}
+
+function initializeCalendar() {
     $('#calendar').fullCalendar({
         header: {
             left: 'prev,next today',
@@ -45,11 +70,6 @@ $(document).ready(function() {
         },
         eventRender: function(event, element) {},
     });
-
-});
-
-function getTasks() {
-
 }
 
 function disableTime() {
@@ -144,6 +164,17 @@ function addTaskToCalendar(title, allDay, startDate, startTime, endDate, endTime
     }]);
 }
 
+function clearModalForm() {
+    document.getElementById('taskTitle').value = '';
+    document.getElementById('allDay').checked = false;
+    document.getElementById('startDate').value = '';
+    document.getElementById('startTime').value = '';
+    document.getElementById('endDate').value = '';
+    document.getElementById('endTime').value = '';
+    document.getElementById('description').value = '';
+    document.getElementById('location').value = '';
+}
+
 // the function to use ajax to add task
 function addTask() {
     if (!validateInput()) {
@@ -158,7 +189,15 @@ function addTask() {
     var endTime = document.getElementById('endTime').value;
     var description = document.getElementById('description').value;
     var location = document.getElementById('location').value;
-    var color = document.getElementById('color').value;
+    var color = '';
+    if (document.getElementById("color1").checked) {
+        color = document.getElementById("color1").value;
+    } else if (document.getElementById("color2").checked) {
+        color = document.getElementById("color2").value;
+    } else if (document.getElementById("color3").checked) {
+        color = document.getElementById("color3").value;
+    }
+    console.log(color);
     // send ajax request
     var xhttp = new XMLHttpRequest();
     var params = {
@@ -181,6 +220,7 @@ function addTask() {
             if (this.responseText == "SAVED") {
                 addTaskToCalendar(title, allday, startDate, startTime, endDate, endTime, description, location, color);
                 $('#exampleModal').modal('toggle');
+                clearModalForm();
                 return;
             }
             if (this.responseText == "UNANTHORIZED") {

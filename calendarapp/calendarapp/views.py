@@ -165,6 +165,27 @@ def addTask(request):
     else:
         return HttpResponse("FAILED")
 
+# the function getting all the tasks related to the logged in user
+def getTasks(request):
+    userid = ''
+    try:
+        userid = request.session['userid']
+    except KeyError:
+        return HttpResponse('UNANTHORIZED')
+    resultSet = Task.objects.filter(owner = userid)
+    tasks = []
+    for entry in resultSet:
+        start = entry.startDate
+        end = entry.endDate
+        if (entry.startTime != ''):
+            start += 'T' + entry.startTime
+        if (entry.endTime != ''):
+            end += 'T' + entry.endTime 
+        task = {'title': entry.title, 'allDay': entry.allDay, 'start': start,\
+            'end': end, 'description' :entry.description, 'location':entry.location, 'color': entry.color, 'textColor': 'white'}
+        tasks.append(task)
+    return HttpResponse(json.dumps(tasks))
+
 # the view for friends list page
 @csrf_exempt
 def friends(request):
