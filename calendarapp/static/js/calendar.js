@@ -306,3 +306,63 @@ function loadValueFromEvent(calEvent) {
         }
     }
 }
+
+// the function to delete task from database
+function deleteTask() {
+    var title = document.getElementById("taskTitleU").value;
+    var startDate = document.getElementById("startDateU").value;
+    var startTime = document.getElementById("startTimeU").value;
+    xhttp = new XMLHttpRequest();
+    var params = {
+        title: title,
+        startDate: startDate,
+        startTime: startTime
+    };
+    xhttp.open("POST", "http://localhost:8000/deleteTask/", true);
+    xhttp.setRequestHeader("Content-Type", "application/json");
+    xhttp.send(JSON.stringify(params));
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            console.log(this.responseText);
+            if (this.responseText == "DELETED") {
+                deleteTaskFromCalendar(title, startDate, startTime);
+                $("#updateDeleteModal").modal('toggle');
+                return;
+            }
+            if (this.responseText == "UNANTHORIZED") {
+                alert("You are not logged in, you will be redirected to the log in page!");
+                window.location.href = "http://localhost:8000";
+                return;
+            }
+            if (this.responseText == "FAILED") {
+                alert("error happened");
+                window.location.href = "http://localhost:8000";
+                return;
+            }
+        }
+    };
+}
+
+// delete the task from calendar
+function deleteTaskFromCalendar(title, startDate, startTime) {
+    var description = document.getElementById("descriptionU").value;
+    var location = document.getElementById("locationU").value;
+    var color = '';
+    if (document.getElementById("colorU1").checked) {
+        color = document.getElementById("colorU1").value;
+    } else if (document.getElementById("colorU2").checked) {
+        color = document.getElementById("colorU2").value;
+    } else if (document.getElementById("colorU3").checked) {
+        color = document.getElementById("colorU3").value;
+    }
+    if (startTime != '') {
+        startDate += 'T' + startTime;
+    }
+    $('#calendar').fullCalendar('removeEvents', function(calEvent) {
+        if (calEvent.title == title && calEvent.start._i == startDate) {
+            return true;
+        } else {
+            return false;
+        }
+    });
+}

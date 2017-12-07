@@ -186,6 +186,31 @@ def getTasks(request):
         tasks.append(task)
     return HttpResponse(json.dumps(tasks))
 
+
+# delete task from database 
+@csrf_exempt
+def deleteTask(request):
+    userid = ''
+    try:
+        userid = request.session['userid']
+    except KeyError:
+        return HttpResponse('UNANTHORIZED')
+    if (request.method == "POST"):
+        data = json.loads(request.body)
+        title = data['title']
+        startDate = data['startDate']
+        startTime = data['startTime']
+        print(title)
+        print(startDate)
+        print(startTime)
+        if (startTime == ''):
+            Task.objects.filter(owner = userid, title = title, startDate = startDate).delete()
+        else:
+            Task.objects.filter(owner = userid, title = title, startDate = startDate, startTime = startTime).delete()
+        return HttpResponse('DELETED')
+    else:
+        return HttpResponse('FAILED')
+
 # the view for friends list page
 @csrf_exempt
 def friends(request):

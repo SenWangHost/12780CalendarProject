@@ -28,6 +28,7 @@ from calendarapp.views import friends
 from calendarapp.views import personalprofile
 from calendarapp.views import addTask
 from calendarapp.views import getTasks
+from calendarapp.views import deleteTask
 admin.autodiscover()
 
 urlpatterns = [
@@ -46,6 +47,7 @@ urlpatterns = [
     url(r'^calendar/$', calendar),
     url(r'^addTask/$', addTask),
     url(r'^getTasks/$', getTasks),
+    url(r'^deleteTask/$', deleteTask),
     # the friends list page
     url(r'^friends/$', friends),
     # the personal profile page
