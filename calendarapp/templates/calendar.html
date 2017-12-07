@@ -31,7 +31,7 @@
             </ul>
         </div>
     </nav>
-    <button id="testbutton" onclick="testAdd();">Test add event</button>
+    <!-- <button id="testbutton" onclick="testAdd();">Test add event</button> -->
     <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
         Launch demo modal
       </button> -->
@@ -103,11 +103,12 @@
                                   Flexible
                                 </label>
                         </div>
+                        <div id="errorField"></div>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="addTask();">Close</button>
-                    <button type="button" class="btn btn-success">Add Your Task</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-success" onclick="addTask();">Add Your Task</button>
                 </div>
             </div>
         </div>

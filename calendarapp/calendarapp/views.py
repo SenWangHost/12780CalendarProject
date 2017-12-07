@@ -13,10 +13,12 @@ def login(request):
     try:
         userid = request.session['userid']
         print('The user has logged in!')
-        t = get_template('todolist.html')
-        html = t.render()
-        return HttpResponse(html)
-    except:
+        pinfo = getPeronalInfo(userid)
+        name = pinfo[0]
+        motto = pinfo[1]
+        params = {'name':name, 'motto':motto}
+        return render(request, 'todolist.html', params)
+    except KeyError:
         print('The user has not logged in!')
         t = get_template('index.html')
         html = t.render()

@@ -1,45 +1,11 @@
 var eventsArray = [{
-        title: 'All Day Event',
-        start: '2017-12-01',
-        description: 'this is a description',
-        editable: true,
-        color: 'red',
-        textColor: 'white',
-    },
-    {
-        title: 'Long Event',
-        start: '2017-12-07',
-        end: '2017-12-10'
-    },
-    {
-        id: 999,
-        title: 'Repeating Event',
-        start: '2017-12-09T16:00:00'
-    },
-    {
-        id: 999,
-        title: 'Repeating Event',
-        start: '2017-12-16T16:00:00'
-    },
-    {
-        title: 'Meeting',
-        start: '2017-12-12T10:30:00',
-        end: '2017-12-12T12:30:00'
-    },
-    {
-        title: 'Lunch',
-        start: '2017-12-12T12:00:00'
-    },
-    {
-        title: 'Birthday Party',
-        start: '2017-12-13T07:00:00'
-    },
-    {
-        title: 'Click for Google',
-        url: 'http://google.com/',
-        start: '2017-12-28'
-    }
-];
+    title: 'All Day Event',
+    start: '2017-12-01',
+    description: 'this is a description',
+    editable: true,
+    color: 'red',
+    textColor: 'white',
+}];
 
 $(document).ready(function() {
 
@@ -96,13 +62,68 @@ function disableTime() {
     }
 }
 
+function validateTimeFormat(input) {
+    var re = /^(([0-1]?[0-9])|([2][0-3])):([0-5]?[0-9])(:([0-5]?[0-9]))?$/;
+    return re.test(input);
+}
+
 function validateInput() {
+    // clear error field
+    document.getElementById("errorField").innerHTML = "";
+    var errorMessageF = "<div class='alert alert-danger alert-dismissible fade show' role='alert'>";
+    var errorMessageB = "<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
+    var message = "";
+    // get title
     var title = document.getElementById('taskTitle').value;
-    var allday = document.getElementById('allDay').value;
+    var allday = document.getElementById('allDay').checked;
     var startDate = document.getElementById('startDate').value;
     var startTime = document.getElementById('startTime').value;
     var endDate = document.getElementById('endDate').value;
     var endTime = document.getElementById('endTime').value;
+    console.log(title);
+    console.log(allday);
+    console.log(startDate);
+    console.log(startTime);
+    console.log(endDate);
+    console.log(endTime);
+    if (title == null || title == '') {
+        message = errorMessageF + "Your task title cannot be empty!" + errorMessageB;
+        document.getElementById("errorField").innerHTML = message;
+        return false;
+    }
+    if (startDate == null || startDate == '') {
+        message = errorMessageF + "Your task's start date cannot be empty!" + errorMessageB;
+        document.getElementById("errorField").innerHTML = message;
+        return false;
+    }
+    if (endDate == null || endDate == '') {
+        message = errorMessageF + "Your task's end date cannot be empty!" + errorMessageB;
+        document.getElementById("errorField").innerHTML = message;
+        return false;
+    }
+    if (!allday) {
+        if (startTime == null || startTime == '') {
+            message = errorMessageF + "Your start time cannot be empty!" + errorMessageB;
+            document.getElementById("errorField").innerHTML = message;
+            return false;
+        }
+        if (endTime == null || endTime == '') {
+            message = errorMessageF + "Your end time cannot be empty!" + errorMessageB;
+            document.getElementById("errorField").innerHTML = message;
+            return false;
+        }
+        if (!validateTimeFormat(startTime)) {
+            message = errorMessageF + "Your start time format is incorrect!" + errorMessageB;
+            document.getElementById("errorField").innerHTML = message;
+            return false;
+        }
+        if (!validateTimeFormat(endTime)) {
+            message = errorMessageF + "Your end time format is incorrect!" + errorMessageB;
+            document.getElementById("errorField").innerHTML = message;
+            return false;
+        }
+    }
+    return true;
 }
 
 
@@ -117,5 +138,8 @@ function testAdd() {
 
 // the function to use ajax to add task
 function addTask() {
+    if (!validateInput()) {
+        return;
+    }
 
 }
