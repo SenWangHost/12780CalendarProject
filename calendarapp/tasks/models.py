@@ -9,6 +9,7 @@ class Task(models.Model):
     allDay = models.BooleanField(default = False)
     startDate = models.CharField(max_length = 50)
     color = models.CharField(max_length = 30)
+    owner = models.CharField(max_length = 50)
     startTime = models.CharField(max_length = 50, blank = True, default = '')
     endDate = models.CharField(max_length = 50, blank = True, default = '')
     endTime = models.CharField(max_length = 50, blank = True, default = '')

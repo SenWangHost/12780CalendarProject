@@ -1,4 +1,8 @@
-var eventsArray = [];
+var eventsArray = [{
+    title: 'Event1',
+    start: '2017-12-04',
+    textColor: 'white'
+}];
 
 $(document).ready(function() {
 
@@ -36,10 +40,14 @@ $(document).ready(function() {
             $(this).css('border-color', 'red');
 
         },
-        eventRender: function(event, element) {}
+        eventRender: function(event, element) {},
     });
 
 });
+
+function getTasks() {
+
+}
 
 function disableTime() {
     // console.log("all day changed!");
@@ -114,12 +122,22 @@ function validateInput() {
 }
 
 
-function testAdd() {
-    alert('test button clicked!');
+function addTaskToCalendar(title, allDay, startDate, startTime, endDate, endTime, description, location, color) {
+    if (startTime != '') {
+        startDate += 'T' + startTime;
+    }
+    if (endTime != '') {
+        endDate += 'T' + endTime;
+    }
     $('#calendar').fullCalendar('addEventSource', [{
-        title: 'All Day Event',
-        start: '2017-12-23',
-        description: 'this is a description'
+        title: title,
+        allDay: allDay,
+        start: startDate,
+        end: endDate,
+        description: description,
+        location: location,
+        color: color,
+        textColor: 'white'
     }]);
 }
 
@@ -158,6 +176,7 @@ function addTask() {
         if (this.readyState == 4 && this.status == 200) {
             console.log(this.responseText);
             if (this.responseText == "SAVED") {
+                addTaskToCalendar(title, allday, startDate, startTime, endDate, endTime, description, location, color);
                 $('#exampleModal').modal('toggle');
             }
         }
