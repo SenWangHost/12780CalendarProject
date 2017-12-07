@@ -52,6 +52,7 @@ function initializeCalendar() {
                 document.getElementById('startDate').value = temp[0];
                 document.getElementById('startTime').value = temp[1];
             }
+            // clearModalForm();
             $('#exampleModal').modal('toggle');
 
             // change the day's background color just for fun
@@ -59,13 +60,17 @@ function initializeCalendar() {
         },
         eventClick: function(calEvent, jsEvent, view) {
 
-            alert('Event: ' + calEvent.title);
-            alert('Event:' + calEvent.description);
-            alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
-            alert('View: ' + view.name);
-
+            // alert('Event: ' + calEvent.title);
+            // alert('Event:' + calEvent.description);
+            // alert(calEvent.start);
+            // alert(calEvent.end);
+            // alert(calEvent.location);
+            // alert(calEvent.color);
+            // alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
+            // alert('View: ' + view.name);
+            $('#updateDeleteModal').modal('toggle');
             // change the border color just for fun
-            $(this).css('border-color', 'red');
+            // $(this).css('border-color', 'red');
 
         },
         eventRender: function(event, element) {},

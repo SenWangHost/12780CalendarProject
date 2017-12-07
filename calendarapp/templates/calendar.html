@@ -38,7 +38,7 @@
     <div id='calendar'>
 
     </div>
-    <!-- Modal -->
+    <!-- Modal For adding the task -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -108,7 +108,111 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-success" onclick="addTask();">Add Your Task</button>
+                    <button type="button" class="btn btn-outline-success" onclick="addTask();">Add Your Task</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal For updating and deleting the task -->
+    <div class="modal fade" id="updateDeleteModal" tabindex="-1" role="dialog" aria-labelledby="updateDeleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="updateDeleteModalLabel">Update/Delete A Task</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                </div>
+                <div class="modal-body">
+                    <div class="input-group">
+                        <label for="taskTitle" class="col-form-label font-weight-bold">Task Title:<span style="color:red">*</span></label>
+                    </div>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="taskTitleU" readonly>
+                        <span class="input-group-btn">
+                            <button class="btn btn-outline-primary" id="taskTitleUB" type="button">Edit</button>
+                          </span>
+                    </div>
+                    <div class="form-check" style="margin-top: 1.5vh">
+                        <label class="form-check-label">
+                                      <input type="checkbox" class="form-check-input" id="allDayU">
+                                      All Day/Long Range Event
+                                    </label>
+                    </div>
+                    <div class="input-group">
+                        <label for="taskTitle" class="col-form-label font-weight-bold">Start Date:<span style="color:red">*</span></label>
+                    </div>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="startDateU" readonly>
+                        <span class="input-group-btn">
+                            <button class="btn btn-outline-primary" id="startDateUB" type="button">Edit</button>
+                        </span>
+                    </div>
+                    <div class="input-group">
+                        <label for="taskTitle" class="col-form-label font-weight-bold">Start Time:<span style="color:red">*</span></label>
+                    </div>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="startTimeU" readonly>
+                        <span class="input-group-btn">
+                            <button class="btn btn-outline-primary" id="startTimeUB" type="button">Edit</button>
+                        </span>
+                    </div>
+                    <div class="input-group">
+                        <label class="col-form-label font-weight-bold">End Date:<span style="color:red">*</span></label>
+                    </div>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="endDateU" readonly>
+                        <span class="input-group-btn">
+                            <button class="btn btn-outline-primary" id="endDateUB" type="button">Edit</button>
+                        </span>
+                    </div>
+                    <div class="input-group">
+                        <label class="col-form-label font-weight-bold">End Time:<span style="color:red">*</span></label>
+                    </div>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="endTimeU" readonly>
+                        <span class="input-group-btn">
+                            <button class="btn btn-outline-primary" id="endTimeU" type="button">Edit</button>
+                        </span>
+                    </div>
+                    <div class="form-group">
+                        <label for="descriptionU" class="font-weight-bold">Description:</label>
+                        <textarea class="form-control" id="descriptionU" name="descriptionU" readonly></textarea>
+                        <button class="btn btn-outline-primary col-2" id="descriptionUB" type="button">Edit</button>
+                    </div>
+                    <div class="input-group">
+                        <label class="col-form-label font-weight-bold">Location:</label>
+                    </div>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="locationU" readonly>
+                        <span class="input-group-btn">
+                                <button class="btn btn-outline-primary" id="locationUB" type="button">Edit</button>
+                            </span>
+                    </div>
+                    <label class="col-form-label font-weight-bold">Importance Of Your Task:</label><br>
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" name="colorU" id="colorU1" value="red" checked>
+                            Important
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" name="colorU" id="colorU2" value="yellow">
+                            Normal
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" name="colorU" id="colorU3" value="green">
+                            Flexible
+                        </label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-outline-danger">Delete Your Task</button>
+                    <button type="button" class="btn btn-outline-success">Update Your Task</button>
                 </div>
             </div>
         </div>
