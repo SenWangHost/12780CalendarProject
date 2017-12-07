@@ -6,6 +6,7 @@ from django.template import Context, Template
 from django.shortcuts import render
 from login.models import User
 from friends.models import Friend
+from tasks.models import Task
 import json
 
 #  the view for log in page
@@ -151,8 +152,13 @@ def addTask(request):
         print(description)
         print(location)
         print(color)
-
-        return HttpResponse("OK")
+        newTask = Task(title = title, allDay = allDay, startDate = startDate, \
+                color = color, startTime = startTime, endDate = endDate, \
+                endTime = endTime, description = description, location = location)
+        newTask.save()
+        return HttpResponse("SAVED")
+    else:
+        return HttpResponse("FAILED")
 
 # the view for friends list page
 @csrf_exempt

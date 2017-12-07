@@ -1,11 +1,4 @@
-var eventsArray = [{
-    title: 'All Day Event',
-    start: '2017-12-01',
-    description: 'this is a description',
-    editable: true,
-    color: 'red',
-    textColor: 'white',
-}];
+var eventsArray = [];
 
 $(document).ready(function() {
 
@@ -161,5 +154,12 @@ function addTask() {
     xhttp.open("POST", "http://localhost:8000/addTask/", true);
     xhttp.setRequestHeader("Content-Type", "application/json");
     xhttp.send(JSON.stringify(params));
-
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            console.log(this.responseText);
+            if (this.responseText == "SAVED") {
+                $('#exampleModal').modal('toggle');
+            }
+        }
+    };
 }
