@@ -395,12 +395,6 @@ function updateTask() {
     console.log(description);
     console.log(location);
     console.log(color);
-    if (startTime != '') {
-        startDate += 'T' + startTime;
-    }
-    if (endTime != '') {
-        endDate += 'T' + endTime;
-    }
     // send ajax request to database for updating the task content
     xhttp = new XMLHttpRequest();
     var params = {
@@ -414,14 +408,15 @@ function updateTask() {
         location: location,
         color: color
     };
-    xhttp.open("POST", "http://localhost:8000/deleteTask/", true);
+    xhttp.open("POST", "http://localhost:8000/updateTask/", true);
     xhttp.setRequestHeader("Content-Type", "application/json");
     xhttp.send(JSON.stringify(params));
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             console.log(this.responseText);
-            if (this.responseText == "DELETED") {
-                deleteTaskFromCalendar(title, startDate, startTime);
+            if (this.responseText == "UPDATE") {
+                updateTaskInCalendar(title, allDay, startDate, endDate, description, location, color);
+                enableReadOnly();
                 $("#updateDeleteModal").modal('toggle');
                 return;
             }

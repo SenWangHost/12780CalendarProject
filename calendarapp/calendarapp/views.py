@@ -211,6 +211,38 @@ def deleteTask(request):
     else:
         return HttpResponse('FAILED')
 
+# update task info in the database
+@csrf_exempt
+def updateTask(request):
+    userid = ''
+    try:
+        userid = request.session['userid']
+    except KeyError:
+        return HttpResponse('UNANTHORIZED')
+    if (request.method == "POST"):
+        data = json.loads(request.body)
+        title = data['title']
+        startDate = data['startDate']
+        startTime = data['startTime']
+        description = data['description']
+        location = data['location']
+        color = data['color']
+        print(title)
+        print(startDate)
+        print(startTime)
+        result = None
+        if (startTime == ''):
+            result = Task.objects.get(owner = userid, title = title, startDate = startDate)
+        else:
+            result = Task.objects.get(owner = userid, title = title, startDate = startDate, startTime = startTime)
+        result.description = description
+        result.location = location
+        result.color = color
+        result.save()
+        return HttpResponse("UPDATE")
+    else:
+        return HttpResponse("FAILED")
+
 # the view for friends list page
 @csrf_exempt
 def friends(request):

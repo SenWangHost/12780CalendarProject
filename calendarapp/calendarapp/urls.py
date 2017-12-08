@@ -29,6 +29,7 @@ from calendarapp.views import personalprofile
 from calendarapp.views import addTask
 from calendarapp.views import getTasks
 from calendarapp.views import deleteTask
+from calendarapp.views import updateTask
 admin.autodiscover()
 
 urlpatterns = [
@@ -48,6 +49,7 @@ urlpatterns = [
     url(r'^addTask/$', addTask),
     url(r'^getTasks/$', getTasks),
     url(r'^deleteTask/$', deleteTask),
+    url(r'^updateTask/$', updateTask),
     # the friends list page
     url(r'^friends/$', friends),
     # the personal profile page
