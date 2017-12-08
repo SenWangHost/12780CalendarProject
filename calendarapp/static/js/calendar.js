@@ -1,5 +1,5 @@
 var eventsArray = [];
-
+var calEventStore = null;
 $(document).ready(function() {
     // load the tasks from the database
     loadTasksFromDatabase();
@@ -72,6 +72,7 @@ function initializeCalendar() {
             // alert(calEvent.color);
             // alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
             // alert('View: ' + view.name);
+            calEventStore = calEvent;
             editButtonEffect();
             loadValueFromEvent(calEvent);
             $('#updateDeleteModal').modal('toggle');
@@ -296,7 +297,7 @@ function loadValueFromEvent(calEvent) {
     if (calEvent.allDay) {
         document.getElementById("allDayU").checked = true;
     } else {
-        document.getElementById("allDayU").checked = true;
+        document.getElementById("allDayU").checked = false;
         if (calEvent.end._i.indexOf('T') != -1) {
             var temp2 = calEvent.end._i.split('T');
             document.getElementById("endDateU").value = temp2[0];
@@ -345,16 +346,16 @@ function deleteTask() {
 
 // delete the task from calendar
 function deleteTaskFromCalendar(title, startDate, startTime) {
-    var description = document.getElementById("descriptionU").value;
-    var location = document.getElementById("locationU").value;
-    var color = '';
-    if (document.getElementById("colorU1").checked) {
-        color = document.getElementById("colorU1").value;
-    } else if (document.getElementById("colorU2").checked) {
-        color = document.getElementById("colorU2").value;
-    } else if (document.getElementById("colorU3").checked) {
-        color = document.getElementById("colorU3").value;
-    }
+    // var description = document.getElementById("descriptionU").value;
+    // var location = document.getElementById("locationU").value;
+    // var color = '';
+    // if (document.getElementById("colorU1").checked) {
+    //     color = document.getElementById("colorU1").value;
+    // } else if (document.getElementById("colorU2").checked) {
+    //     color = document.getElementById("colorU2").value;
+    // } else if (document.getElementById("colorU3").checked) {
+    //     color = document.getElementById("colorU3").value;
+    // }
     if (startTime != '') {
         startDate += 'T' + startTime;
     }
@@ -365,4 +366,97 @@ function deleteTaskFromCalendar(title, startDate, startTime) {
             return false;
         }
     });
+}
+
+// the function to update the task from the database
+function updateTask() {
+    var title = document.getElementById("taskTitleU").value;
+    var allDay = document.getElementById("allDayU").checked;
+    var startDate = document.getElementById("startDateU").value;
+    var startTime = document.getElementById("startTimeU").value;
+    var endDate = document.getElementById("endDateU").value;
+    var endTime = document.getElementById("endTimeU").value;
+    var description = document.getElementById("descriptionU").value;
+    var location = document.getElementById("locationU").value;
+    var color = '';
+    if (document.getElementById("colorU1").checked) {
+        color = document.getElementById("colorU1").value;
+    } else if (document.getElementById("colorU2").checked) {
+        color = document.getElementById("colorU2").value;
+    } else if (document.getElementById("colorU3").checked) {
+        color = document.getElementById("colorU3").value;
+    }
+    console.log(title);
+    console.log(allDay);
+    console.log(startDate);
+    console.log(startTime);
+    console.log(endDate);
+    console.log(endTime);
+    console.log(description);
+    console.log(location);
+    console.log(color);
+    if (startTime != '') {
+        startDate += 'T' + startTime;
+    }
+    if (endTime != '') {
+        endDate += 'T' + endTime;
+    }
+    // send ajax request to database for updating the task content
+    xhttp = new XMLHttpRequest();
+    var params = {
+        title: title,
+        allDay: allDay,
+        startDate: startDate,
+        startTime: startTime,
+        endDate: endDate,
+        endTime: endTime,
+        description: description,
+        location: location,
+        color: color
+    };
+    xhttp.open("POST", "http://localhost:8000/deleteTask/", true);
+    xhttp.setRequestHeader("Content-Type", "application/json");
+    xhttp.send(JSON.stringify(params));
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            console.log(this.responseText);
+            if (this.responseText == "DELETED") {
+                deleteTaskFromCalendar(title, startDate, startTime);
+                $("#updateDeleteModal").modal('toggle');
+                return;
+            }
+            if (this.responseText == "UNANTHORIZED") {
+                alert("You are not logged in, you will be redirected to the log in page!");
+                window.location.href = "http://localhost:8000";
+                return;
+            }
+            if (this.responseText == "FAILED") {
+                alert("error happened");
+                window.location.href = "http://localhost:8000";
+                return;
+            }
+        }
+    };
+}
+
+// the function to update task for the calendar
+function updateTaskInCalendar(title, allDay, start, end, description, location, color) {
+    console.log(calEventStore);
+    if (calEventStore != null) {
+        calEventStore.description = description;
+        calEventStore.location = location;
+        calEventStore.color = color;
+        $('#calendar').fullCalendar('updateEvent', calEventStore);
+    }
+}
+
+// the function to reverse readonly effect
+function enableReadOnly() {
+    document.getElementById("taskTitleU").readOnly = true;
+    document.getElementById("startDateU").readOnly = true;
+    document.getElementById("startTimeU").readOnly = true;
+    document.getElementById("endDateU").readOnly = true;
+    document.getElementById("endTimeU").readOnly = true;
+    document.getElementById("descriptionU").readOnly = true;
+    document.getElementById("locationU").readOnly = true;
 }
