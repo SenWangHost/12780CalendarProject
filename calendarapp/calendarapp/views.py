@@ -19,7 +19,7 @@ def login(request):
         name = pinfo[0]
         motto = pinfo[1]
         params = {'name':name, 'motto':motto}
-        return render(request, 'todolist.html', params)
+        return render(request, 'calendar.html', params)
     except KeyError:
         print('The user has not logged in!')
         t = get_template('index.html')
