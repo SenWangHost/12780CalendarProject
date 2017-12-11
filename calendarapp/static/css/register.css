@@ -2,6 +2,9 @@
 body {
     background-image: url("../images/background.gif");
     background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
 }
 
 #title {
